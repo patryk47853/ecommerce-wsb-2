@@ -32,7 +32,7 @@ public class CartItem {
     }
 
     public double getTotalPrice() {
-        return product.price().doubleValue() * quantity;
+        return product.price() * quantity;
     }
 
     @Override
