@@ -9,6 +9,7 @@ import pl.wsb.ecommerce.catalog.Product;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 class ShoppingCartTest {
@@ -50,7 +51,7 @@ class ShoppingCartTest {
         double totalPrice = cart.calculateTotalPrice();
 
         // Then
-        double expectedPrice = (apple.price().doubleValue() + banana.price().doubleValue()) * 0.9;
+        double expectedPrice = 3.87; // (2.50 + 1.80) * 0.9 = 3.87
         assertEquals(expectedPrice, totalPrice, 0.01);
     }
 
@@ -66,7 +67,47 @@ class ShoppingCartTest {
         double totalPrice = cart.calculateTotalPrice();
 
         // Then
-        double expectedPrice = apple.price().doubleValue() + milk.price().doubleValue() + 1.0;
+        double expectedPrice = 2.50 + 3.20 + 1.00; // = 6.70
+        assertEquals(expectedPrice, totalPrice, 0.01);
+    }
+
+    @Test
+    void shouldRemoveProductWhenQuantityDecreasesToZero() {
+        // Given
+        cart.addProduct(apple);
+
+        // When
+        cart.removeProduct(apple);
+
+        // Then
+        assertFalse(cart.getItems().containsKey(apple));
+    }
+
+    @Test
+    void shouldDecreaseQuantityWhenProductRemoved() {
+        // Given
+        cart.addProduct(apple);
+        cart.addProduct(apple);
+
+        // When
+        cart.removeProduct(apple);
+
+        // Then
+        assertEquals(1, cart.getItems().get(apple).getQuantity());
+    }
+
+    @Test
+    void shouldClearPromotion() {
+        // Given
+        cart.addProduct(apple);
+        cart.setPromotion(new TenPercentOffPromotion());
+
+        // When
+        cart.clearPromotion();
+        double totalPrice = cart.calculateTotalPrice();
+
+        // Then
+        double expectedPrice = 2.50;
         assertEquals(expectedPrice, totalPrice, 0.01);
     }
 }
