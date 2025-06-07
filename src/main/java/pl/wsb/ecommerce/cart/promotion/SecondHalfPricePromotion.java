@@ -10,7 +10,7 @@ public class SecondHalfPricePromotion implements Promotion {
         return items.stream()
                 .mapToDouble(item -> {
                     int quantity = item.getQuantity();
-                    double price = item.getProduct().price().doubleValue();
+                    double price = item.getProduct().price();
 
                     int pairs = quantity / 2;
                     int singleItems = quantity % 2;
