@@ -12,7 +12,7 @@ public class CheapestForOneZlotyPromotion implements Promotion {
         List<Double> prices = new ArrayList<>();
         for (CartItem item : items) {
             for (int i = 0; i < item.getQuantity(); i++) {
-                prices.add(item.getProduct().price().doubleValue());
+                prices.add(item.getProduct().price());
             }
         }
         prices.sort(Comparator.naturalOrder());
@@ -35,3 +35,4 @@ public class CheapestForOneZlotyPromotion implements Promotion {
         return total;
     }
 }
+
