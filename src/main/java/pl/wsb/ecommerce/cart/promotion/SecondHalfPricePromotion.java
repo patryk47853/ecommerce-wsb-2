@@ -7,14 +7,16 @@ import java.util.List;
 public class SecondHalfPricePromotion implements Promotion {
     @Override
     public double apply(List<CartItem> items) {
-        double total = 0.0;
-        for (CartItem item : items) {
-            int quantity = item.getQuantity();
-            double price = item.getProduct().price().doubleValue();
-            int pairs = quantity / 2;
-            int remainder = quantity % 2;
-            total += pairs * price * 1.5 + remainder * price;
-        }
-        return total;
+        return items.stream()
+                .mapToDouble(item -> {
+                    int quantity = item.getQuantity();
+                    double price = item.getProduct().price().doubleValue();
+
+                    int pairs = quantity / 2;
+                    int singleItems = quantity % 2;
+
+                    return pairs * price * 1.5 + singleItems * price;
+                })
+                .sum();
     }
 }
