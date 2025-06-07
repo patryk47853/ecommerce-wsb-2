@@ -6,8 +6,6 @@ import pl.wsb.ecommerce.cart.promotion.TenPercentOffPromotion;
 import pl.wsb.ecommerce.catalog.Category;
 import pl.wsb.ecommerce.catalog.Product;
 
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -22,9 +20,9 @@ class ShoppingCartTest {
     @BeforeEach
     void setUp() {
         cart = new ShoppingCart();
-        apple = new Product("Apple", new BigDecimal("2.50"), Category.FRUITS, true);
-        banana = new Product("Banana", new BigDecimal("1.80"), Category.FRUITS, true);
-        milk = new Product("Milk", new BigDecimal("3.20"), Category.DAIRY, true);
+        apple = new Product("Apple", 2.50, Category.FRUITS, true);
+        banana = new Product("Banana",1.80, Category.FRUITS, true);
+        milk = new Product("Milk", 3.20, Category.DAIRY, true);
     }
 
     @Test
