@@ -22,7 +22,7 @@ public class CheapestForOneZlotyPromotion implements Promotion {
             int groupSize = Math.min(3, prices.size() - index);
             List<Double> group = prices.subList(index, index + groupSize);
             if (groupSize == 3) {
-                total += 1.0; // Apply 1 PLN to the cheapest
+                total += 1.0; // Cheapest for 1 PLN
                 total += group.get(1);
                 total += group.get(2);
             } else {
@@ -35,4 +35,3 @@ public class CheapestForOneZlotyPromotion implements Promotion {
         return total;
     }
 }
-
